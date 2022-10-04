@@ -10,6 +10,9 @@ return [
     'status' => 'Status',
     'uniqueid' => 'UniqueID',
     'verification_code' => 'Verification code',
-    'enable2fa' => 'Enable 2FA',
+    'enable_2fa' => 'Enable 2FA',
     'search_users' => 'Search users',
+    '2fa_status' => '2FA status',
+    'enabled' => 'Enabled',
+    'disabled' => 'Disabled',
 ];

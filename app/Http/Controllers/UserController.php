@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Carbon\Carbon;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -45,13 +45,12 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, UserService $userService)
     {
-        $id = preg_replace('/@cesnet\.cz$/', '', $user->uniqueid);
-        $ldapUser = \App\Ldap\User::where('tcsPersonalID', '=', $id)->firstOrFail();
-        $tokenSeeds = !is_null($ldapUser->getFirstAttribute('tokenSeeds'));
-
-        return view('users.show', ['user' => $user, 'tokenSeeds' => $tokenSeeds]);
+        return view('users.show', [
+            'user' => $user,
+            'tokenSeeds' => $userService->checkToken($user)
+        ]);
     }
 
     /**
@@ -72,9 +71,12 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user, UserService $userService)
     {
-        //
+        return view('users.qr', [
+            'back' => route('users.show', $user),
+            'qrCode' => $userService->getQrCode($user)
+        ]);
     }
 
     /**

@@ -21,12 +21,17 @@
                     </dt>
                 </div>
                 <div class="bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 even:bg-white px-4 py-5">
-                    <dd>{{ __('common.2fa_enabled') }}</dd>
+                    <dd>{{ __('common.2fa_status') }}</dd>
                     <dt>
                         @if ($tokenSeeds)
-                            on
+                            {{ __('common.enabled') }}
                         @else
-                            off
+                            <!-- dialog window to confirm enabling 2FA -->
+                            <form action="{{ route('users.update', $user) }}" method="post">
+                                @csrf
+                                @method('patch')
+                                <x-buttons.enable2fa href="#" />
+                            </form>
                         @endif
                     </dt>
                 </div>
@@ -34,9 +39,8 @@
         </div>
     </div>
     <div>
-        <x-buttons.back href="{{ URL::previous() }}" />
-        <!-- show button below only if tokenSeeds attribute in the LDAP server is empty -->
-        <!-- dialog window to confirm enabling 2FA -->
-        <x-buttons.enable2fa href="#" />
+        @if (URL::previous() !== URL::current())
+            <x-buttons.back href="{{ URL::previous() }}" />
+        @endif
     </div>
 @endsection
