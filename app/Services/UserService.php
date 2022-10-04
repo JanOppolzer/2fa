@@ -41,4 +41,11 @@ class UserService
 
         return $qrCode;
     }
+
+    public function disableTotp(User $user)
+    {
+        $ldapUser = $this->getLdapUser($user);
+        $ldapUser->tokenSeeds = null;
+        $ldapUser->save();
+    }
 }

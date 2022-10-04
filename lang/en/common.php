@@ -15,4 +15,5 @@ return [
     '2fa_status' => '2FA status',
     'enabled' => 'Enabled',
     'disabled' => 'Disabled',
+    '2fa_disabled' => '2FA disabled.',
 ];

@@ -15,6 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', User::class);
+
         return view('users.index');
     }
 
@@ -47,6 +49,8 @@ class UserController extends Controller
      */
     public function show(User $user, UserService $userService)
     {
+        $this->authorize('view', $user);
+
         return view('users.show', [
             'user' => $user,
             'tokenSeeds' => $userService->checkToken($user)
@@ -73,6 +77,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user, UserService $userService)
     {
+        $this->authorize('update', $user);
+
         return view('users.qr', [
             'back' => route('users.show', $user),
             'qrCode' => $userService->getQrCode($user)
@@ -85,8 +91,14 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, UserService $userService)
     {
-        //
+        $this->authorize('delete', $user);
+
+        $userService->disableTotp($user);
+
+        return redirect()
+            ->route('users.show', $user)
+            ->with('status', __('common.2fa_disabled'));
     }
 }

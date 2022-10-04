@@ -25,6 +25,13 @@
                     <dt>
                         @if ($tokenSeeds)
                             {{ __('common.enabled') }}
+                            @can('delete', $user)
+                                <form action="{{ route('users.destroy', $user) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="hover:bg-red-200 text-red-600 bg-red-300 inline-block px-4 py-2 rounded shadow">Disable 2FA</button>
+                                </form>
+                            @endcan
                         @else
                             <!-- dialog window to confirm enabling 2FA -->
                             <form action="{{ route('users.update', $user) }}" method="post">
