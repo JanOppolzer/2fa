@@ -1,4 +1,5 @@
 @extends('layout')
+@section('title', __('users.show', ['name' => $user->name]))
 
 @section('content')
     <div class="sm:rounded-lg mb-6 overflow-hidden bg-white shadow">
@@ -29,7 +30,9 @@
                                 <form action="{{ route('users.destroy', $user) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button class="hover:bg-red-200 text-red-600 bg-red-300 inline-block px-4 py-2 rounded shadow">Disable 2FA</button>
+                                    <button
+                                        class="hover:bg-red-200 inline-block px-4 py-2 text-red-600 bg-red-300 rounded shadow">Disable
+                                        2FA</button>
                                 </form>
                             @endcan
                         @else

@@ -25,7 +25,7 @@ class FakeController extends Controller
         Auth::login($user);
         Session::regenerate();
 
-        return redirect()->intended('/users');
+        return redirect()->intended('/');
     }
 
     public function logout()

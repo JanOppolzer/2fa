@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FakeController;
+use App\Http\Controllers\ShibbolethController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return auth()->user() ? view('dashboard') : view('welcome');
 });
 
 if (App::environment(['local', 'testing'])) {
@@ -26,3 +27,7 @@ if (App::environment(['local', 'testing'])) {
 }
 
 Route::resource('users', UserController::class)->only('index', 'show', 'update', 'destroy');
+
+Route::get('login', [ShibbolethController::class, 'create'])->middleware('guest')->name('login');
+Route::get('auth', [ShibbolethController::class, 'store'])->middleware('guest');
+Route::get('logout', [ShibbolethController::class, 'destroy'])->middleware('auth')->name('logout');

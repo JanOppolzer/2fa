@@ -2,7 +2,7 @@
 
     <div class="mb-4">
         <form>
-            <label for="search">{{ __('common.search_users') }}</label>
+            <label class="sr-only" for="search">{{ __('common.search_users') }}</label>
             <input wire:model.debounce.500ms="search" class="w-full px-4 py-2 border rounded-lg" type="text"
                 name="search" id="search" placeholder="{{ __('users.searchbox') }}" autofocus>
         </form>
@@ -54,7 +54,7 @@
 
             <tfoot class="border-t border-gray-300">
                 <tr>
-                    <td colspan="4">{{ $users->links() }}</td>
+                    <td colspan="4">{{ $users->links('livewire::tailwind') }}</td>
                 </tr>
             </tfoot>
 
