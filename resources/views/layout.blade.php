@@ -10,7 +10,7 @@
     @livewireStyles
 </head>
 
-<body class="bg-gray antialiased text-gray-700">
+<body class="bg-gray-50 dark:bg-gray-900 dark:text-gray-400 antialiased text-gray-700">
 
     @include('partials.header')
 

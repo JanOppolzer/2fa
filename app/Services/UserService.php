@@ -9,13 +9,18 @@ use App\Ldap\User as LdapUser;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use Throwable;
 
 class UserService
 {
     public function getLdapUser(User $user)
     {
-        $id = preg_replace('/@cesnet\.cz$/', '', $user->uniqueid);
-        return LdapUser::where('tcsPersonalID', '=', $id)->firstOrFail();
+        try {
+            $id = preg_replace('/@cesnet\.cz$/', '', $user->uniqueid);
+            return LdapUser::where('tcsPersonalID', '=', $id)->firstOrFail();
+        } catch (Throwable $t) {
+            abort(404);
+        }
     }
 
     public function checkToken(User $user)

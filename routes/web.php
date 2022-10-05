@@ -28,6 +28,10 @@ if (App::environment(['local', 'testing'])) {
 
 Route::resource('users', UserController::class)->only('index', 'show', 'update', 'destroy');
 
+Route::get('profile', function () {
+    return to_route('users.show', auth()->user());
+});
+
 Route::get('login', [ShibbolethController::class, 'create'])->middleware('guest')->name('login');
 Route::get('auth', [ShibbolethController::class, 'store'])->middleware('guest');
 Route::get('logout', [ShibbolethController::class, 'destroy'])->middleware('auth')->name('logout');

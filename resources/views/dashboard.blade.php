@@ -2,6 +2,10 @@
 @section('title', __('common.dashboard'))
 
 @section('content')
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium id quibusdam illum quod libero sint modi
-    perspiciatis, possimus error esse temporibus omnis obcaecati commodi tempore. Similique facilis aut cupiditate in?
+    <p class="mb-6">
+        {!! __('welcome.howto') !!}
+    </p>
+    <p>
+        {!! __('welcome.contact') !!} <a href="mailto:info@eduid.cz" class="hover:underline text-blue-500">info@eduid.cz</a>.
+    </p>
 @endsection
