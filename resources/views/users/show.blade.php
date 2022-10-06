@@ -25,7 +25,6 @@
                     <dd>{{ __('common.2fa_status') }}</dd>
                     <dt>
                         @if ($tokenSeeds)
-                            {{ __('common.enabled') }}
                             @can('delete', $user)
                                 <form action="{{ route('users.destroy', $user) }}" method="post">
                                     @csrf
@@ -34,6 +33,8 @@
                                         class="hover:bg-red-200 inline-block px-4 py-2 text-red-600 bg-red-300 rounded shadow">Disable
                                         2FA</button>
                                 </form>
+                            @else
+                                {{ __('common.enabled') }}
                             @endcan
                         @else
                             <!-- dialog window to confirm enabling 2FA -->

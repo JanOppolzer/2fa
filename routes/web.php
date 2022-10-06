@@ -22,15 +22,15 @@ Route::get('/', function () {
 });
 
 if (App::environment(['local', 'testing'])) {
-    Route::match(['get', 'post'], '/fakelogin/{id?}', [FakeController::class, 'login']);
-    Route::get('fakelogout', [FakeController::class, 'logout']);
+    Route::match(['get', 'post'], '/fakelogin/{id?}', [FakeController::class, 'login'])->middleware('guest');
+    Route::get('fakelogout', [FakeController::class, 'logout'])->middleware('auth');
 }
 
 Route::resource('users', UserController::class)->only('index', 'show', 'update', 'destroy');
 
 Route::get('profile', function () {
     return to_route('users.show', auth()->user());
-});
+})->middleware('auth');
 
 Route::get('login', [ShibbolethController::class, 'create'])->middleware('guest')->name('login');
 Route::get('auth', [ShibbolethController::class, 'store'])->middleware('guest');
