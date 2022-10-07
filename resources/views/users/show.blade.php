@@ -10,7 +10,11 @@
             <dl>
                 <div class="bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 even:bg-white px-4 py-5">
                     <dd>{{ __('common.name') }}</dd>
-                    <dt>{{ $user->name }}</dt>
+                    <dt class="gap-x-2 flex">
+                        <span>{{ $user->name }}</span>
+                        <span><x-pils.user-admin :user="$user" /></span>
+                        <span><x-pils.user-manager :user="$user" /></span>
+                    </dt>
                 </div>
                 <div class="bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 even:bg-white px-4 py-5">
                     <dd>{{ __('common.uniqueid') }}</dd>
@@ -53,5 +57,45 @@
         @if (URL::previous() !== URL::current())
             <x-buttons.back href="{{ URL::previous() }}" />
         @endif
+        @can('admin')
+            <form action="{{ route('users.update', $user) }}" method="post" id="admin">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="action" value="admin">
+            </form>
+            <form action="{{ route('users.update', $user) }}" method="post" id="manager">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="action" value="manager">
+            </form>
+            <x-button form="admin" color="indigo">
+                @if ($user->admin)
+                    {{ __('users.revoke_admin') }}
+                @else
+                    {{ __('users.grant_admin') }}
+                @endif
+            </x-button>
+            <x-button form="manager">
+                @if ($user->manager)
+                    {{ __('users.revoke_manager') }}
+                @else
+                    {{ __('users.revoke_manager') }}
+                @endif
+            </x-button>
+        @endcan
+        @can('manager')
+            <form action="{{ route('users.update', $user) }}" method="post" id="manager">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="action" value="manager">
+            </form>
+            <x-button form="manager">
+                @if ($user->manager)
+                    {{ __('users.revoke_manager') }}
+                @else
+                    {{ __('users.revoke_manager') }}
+                @endif
+            </x-button>
+    @endcan
     </div>
 @endsection

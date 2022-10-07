@@ -53,4 +53,20 @@ class UserService
         $ldapUser->tokenSeeds = null;
         $ldapUser->save();
     }
+
+    public function admin(User $user)
+    {
+        $user->admin = $user->admin ? false : true;
+        $user->update();
+
+        return $user->admin;
+    }
+
+    public function manager(User $user)
+    {
+        $user->manager = $user->manager ? false : true;
+        $user->update();
+
+        return $user->manager;
+    }
 }
