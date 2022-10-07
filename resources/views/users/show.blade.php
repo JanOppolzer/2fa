@@ -33,9 +33,7 @@
                                 <form action="{{ route('users.destroy', $user) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button
-                                        class="hover:bg-red-200 inline-block px-4 py-2 text-red-600 bg-red-300 rounded shadow">Disable
-                                        2FA</button>
+                                    <x-button color="red">{{ __('common.disable_2fa') }}</x-button>
                                 </form>
                             @else
                                 {{ __('common.enabled') }}
@@ -45,7 +43,7 @@
                             <form action="{{ route('users.update', $user) }}" method="post">
                                 @csrf
                                 @method('patch')
-                                <x-buttons.enable2fa href="#" />
+                                <x-button color="lime">{{ __('common.enable_2fa') }}</x-button>
                             </form>
                         @endif
                     </dt>
@@ -54,20 +52,8 @@
         </div>
     </div>
     <div>
-        @if (URL::previous() !== URL::current())
-            <x-buttons.back href="{{ URL::previous() }}" />
-        @endif
         @can('admin')
-            <form action="{{ route('users.update', $user) }}" method="post" id="admin">
-                @csrf
-                @method('patch')
-                <input type="hidden" name="action" value="admin">
-            </form>
-            <form action="{{ route('users.update', $user) }}" method="post" id="manager">
-                @csrf
-                @method('patch')
-                <input type="hidden" name="action" value="manager">
-            </form>
+            <x-buttons.back href="{{ route('users.index') }}" />
             <x-button form="admin" color="indigo">
                 @if ($user->admin)
                     {{ __('users.revoke_admin') }}
@@ -79,23 +65,39 @@
                 @if ($user->manager)
                     {{ __('users.revoke_manager') }}
                 @else
-                    {{ __('users.revoke_manager') }}
+                    {{ __('users.grant_manager') }}
                 @endif
             </x-button>
+        @elsecan('manager')
+            <x-buttons.back href="{{ route('users.index') }}" />
+            <x-button form="manager">
+                @if ($user->manager)
+                    {{ __('users.revoke_manager') }}
+                @else
+                    {{ __('users.grant_manager') }}
+                @endif
+            </x-button>
+        @else
+            <x-buttons.back href="{{ route('home') }}" />
         @endcan
-        @can('manager')
+
+        @can('admin')
+            <form action="{{ route('users.update', $user) }}" method="post" id="admin">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="action" value="admin">
+            </form>
             <form action="{{ route('users.update', $user) }}" method="post" id="manager">
                 @csrf
                 @method('patch')
                 <input type="hidden" name="action" value="manager">
             </form>
-            <x-button form="manager">
-                @if ($user->manager)
-                    {{ __('users.revoke_manager') }}
-                @else
-                    {{ __('users.revoke_manager') }}
-                @endif
-            </x-button>
-    @endcan
+        @elsecan('manager')
+            <form action="{{ route('users.update', $user) }}" method="post" id="manager">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="action" value="manager">
+            </form>
+        @endcan
     </div>
 @endsection

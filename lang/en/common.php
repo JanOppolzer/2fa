@@ -9,6 +9,7 @@ return [
     'disabled' => 'Disabled',
     'email' => 'Email address',
     'enable_2fa' => 'Enable 2FA',
+    'disable_2fa' => 'Disable 2FA',
     'enabled' => 'Enabled',
     'inactive' => 'Inactive',
     'login' => 'Login',

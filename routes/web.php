@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return auth()->user() ? view('dashboard') : view('welcome');
-});
+})->name('home');
 
 if (App::environment(['local', 'testing'])) {
     Route::match(['get', 'post'], '/fakelogin/{id?}', [FakeController::class, 'login'])->middleware('guest');
