@@ -1,0 +1,25 @@
+<?php
+
+return [
+    '2fa_disabled' => '2FA vypnuto.',
+    '2fa_status' => 'Stav 2FA',
+    'active' => 'Aktivní',
+    'back' => 'Zpět',
+    'dashboard' => 'Dashboard',
+    'disable_2fa' => 'Vypnout 2FA',
+    'disabled' => 'Vypnuto',
+    'email' => 'E-mailová adresa',
+    'enable_2fa' => 'Zapnout 2FA',
+    'enabled' => 'Zapnuto',
+    'inactive' => 'Neaktivní',
+    'login' => 'Přihlásit',
+    'logout' => 'Odhlásit',
+    'my_profile' => 'Můj profil',
+    'name' => 'Jméno',
+    'search_users' => 'Hledat uživatele',
+    'show' => 'Zobrazit',
+    'status' => 'Status',
+    'uniqueid' => 'UniqueID',
+    'users' => 'Uživatelé',
+    'verification_code' => 'Ověřovací kód',
+];

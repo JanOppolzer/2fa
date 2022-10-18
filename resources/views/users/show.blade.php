@@ -68,15 +68,6 @@
                     {{ __('users.grant_manager') }}
                 @endif
             </x-button>
-        @elsecan('manager')
-            <x-buttons.back href="{{ route('users.index') }}" />
-            <x-button form="manager">
-                @if ($user->manager)
-                    {{ __('users.revoke_manager') }}
-                @else
-                    {{ __('users.grant_manager') }}
-                @endif
-            </x-button>
         @else
             <x-buttons.back href="{{ route('home') }}" />
         @endcan
@@ -87,12 +78,6 @@
                 @method('patch')
                 <input type="hidden" name="action" value="admin">
             </form>
-            <form action="{{ route('users.update', $user) }}" method="post" id="manager">
-                @csrf
-                @method('patch')
-                <input type="hidden" name="action" value="manager">
-            </form>
-        @elsecan('manager')
             <form action="{{ route('users.update', $user) }}" method="post" id="manager">
                 @csrf
                 @method('patch')

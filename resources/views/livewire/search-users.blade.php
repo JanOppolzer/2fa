@@ -28,7 +28,8 @@
 
             <tbody class="divide-y divide-gray-300">
                 @foreach ($users as $user)
-                    <tr class="hover:bg-blue-50" role="button">
+                    <tr x-data class="hover:bg-blue-50" role="button"
+                        @click="window.location = $el.querySelectorAll('a')[1].href">
                         <td class="px-6 py-3 text-sm">
                             <div class="font-bold">{{ $user->name }}</div>
                             <div class="text-gray-400">{{ $user->uniqueid }}</div>
