@@ -11,6 +11,6 @@ return [
     'pii-link' => 'https://www.cesnet.cz/zpracovani-osobnich-udaju/',
     'pii-text' => 'Zpracování osobních údajů',
     'requested_attributes' => 'Pro přihlášení aplikace vyžaduje následující uživatelské atributy:',
-    'switch_language' => 'Přepnout do češtiny',
+    'switch_language' => 'Switch to English',
     'uniqueid' => 'eduPersonUniqueId',
 ];
