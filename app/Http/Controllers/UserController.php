@@ -52,9 +52,9 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        $userService->getQrCode($user);
+        $qrCode = $userService->getQrCode($user);
 
-        return view('users.qr', ['qrCode' => $userService->getQrCode($user)]);
+        return view('users.qr', compact('qrCode'));
     }
 
     /**
