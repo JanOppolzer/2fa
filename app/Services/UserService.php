@@ -16,7 +16,7 @@ class UserService
     public function getLdapUser(User $user)
     {
         try {
-            $id = preg_replace('/@cesnet\.cz$/', '', $user->uniqueid);
+            $id = preg_replace('/@.*$/', '', $user->uniqueid);
 
             return LdapUser::where('tcsPersonalID', '=', $id)->firstOrFail();
         } catch (Throwable $t) {

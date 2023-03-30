@@ -19,7 +19,7 @@ class UserAdminControllerTest extends TestCase
         $user = User::factory()->create(['manager' => false, 'admin' => false]);
 
         LdapUser::create([
-            'tcsPersonalID' => preg_replace('/@cesnet\.cz$/', '', $user->uniqueid),
+            'tcsPersonalID' => preg_replace('/@.*$/', '', $user->uniqueid),
         ]);
 
         $this->assertTrue(Auth::guest());
@@ -48,7 +48,7 @@ class UserAdminControllerTest extends TestCase
         $user = User::factory()->create(['manager' => false, 'admin' => true]);
 
         LdapUser::create([
-            'tcsPersonalID' => preg_replace('/@cesnet\.cz$/', '', $user->uniqueid),
+            'tcsPersonalID' => preg_replace('/@.*$/', '', $user->uniqueid),
         ]);
 
         $this->assertTrue(Auth::guest());
