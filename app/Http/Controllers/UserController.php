@@ -52,34 +52,9 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        switch ($request->action) {
-            case 'admin':
-                $status = $userService->admin($user) ? 'granted' : 'revoked';
-                $color = $status === 'granted' ? 'red' : 'green';
+        $userService->getQrCode($user);
 
-                return to_route('users.show', $user)
-                    ->with('status', __("users.admin_$status", ['name' => $user->name]))
-                    ->with('color', $color);
-
-                break;
-
-            case 'manager':
-                $status = $userService->manager($user) ? 'granted' : 'revoked';
-                $color = $status === 'granted' ? 'red' : 'green';
-
-                return to_route('users.show', $user)
-                    ->with('status', __("users.manager_$status", ['name' => $user->name]))
-                    ->with('color', $color);
-
-                break;
-
-            default:
-                $userService->getQrCode($user);
-
-                return view('users.qr', ['qrCode' => $userService->getQrCode($user)]);
-
-                break;
-        }
+        return view('users.qr', ['qrCode' => $userService->getQrCode($user)]);
     }
 
     /**

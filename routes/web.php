@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\FakeController;
 use App\Http\Controllers\ShibbolethController;
+use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserManagerController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +38,12 @@ if (App::environment(['local', 'testing'])) {
 }
 
 Route::resource('users', UserController::class)->only('index', 'show', 'update', 'destroy');
+
+Route::post('users/{user}/admin', [UserAdminController::class, 'store'])->name('users.grant_admin');
+Route::delete('users/{user}/admin', [UserAdminController::class, 'destroy'])->name('users.revoke_admin');
+
+Route::post('users/{user}/manager', [UserManagerController::class, 'store'])->name('users.grant_manager');
+Route::delete('users/{user}/manager', [UserManagerController::class, 'destroy'])->name('users.revoke_manager');
 
 Route::get('profile', function () {
     return to_route('users.show', auth()->user());
