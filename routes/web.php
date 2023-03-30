@@ -22,6 +22,7 @@ Route::get('language/{locale}', function ($locale = null) {
         app()->setLocale($locale);
         session()->put('locale', $locale);
     }
+
     return redirect()->back();
 });
 
@@ -30,8 +31,8 @@ Route::get('/', function () {
 })->name('home');
 
 if (App::environment(['local', 'testing'])) {
-    Route::match(['get', 'post'], '/fakelogin/{id?}', [FakeController::class, 'login'])->middleware('guest');
-    Route::get('fakelogout', [FakeController::class, 'logout'])->middleware('auth');
+    Route::post('fakelogin', [FakeController::class, 'store'])->middleware('guest')->name('fakelogin');
+    Route::get('fakelogout', [FakeController::class, 'destroy'])->middleware('auth')->name('fakelogout');
 }
 
 Route::resource('users', UserController::class)->only('index', 'show', 'update', 'destroy');

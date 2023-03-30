@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use OTPHP\TOTP;
-use App\Models\User;
-use BaconQrCode\Writer;
 use App\Ldap\User as LdapUser;
-use BaconQrCode\Renderer\ImageRenderer;
+use App\Models\User;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
+use OTPHP\TOTP;
 use Throwable;
 
 class UserService
@@ -17,6 +17,7 @@ class UserService
     {
         try {
             $id = preg_replace('/@cesnet\.cz$/', '', $user->uniqueid);
+
             return LdapUser::where('tcsPersonalID', '=', $id)->firstOrFail();
         } catch (Throwable $t) {
             abort(404);
@@ -25,7 +26,7 @@ class UserService
 
     public function checkToken(User $user)
     {
-        return !is_null($this->getLdapUser($user)->getFirstAttribute('tokenSeeds'));
+        return ! is_null($this->getLdapUser($user)->getFirstAttribute('tokenSeeds'));
     }
 
     public function getQrCode(User $user)

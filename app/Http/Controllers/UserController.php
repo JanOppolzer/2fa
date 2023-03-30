@@ -26,27 +26,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
@@ -58,19 +37,8 @@ class UserController extends Controller
 
         return view('users.show', [
             'user' => $user,
-            'tokenSeeds' => $userService->checkToken($user)
+            'tokenSeeds' => $userService->checkToken($user),
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
     }
 
     /**
@@ -85,10 +53,10 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         switch ($request->action) {
-
             case 'admin':
                 $status = $userService->admin($user) ? 'granted' : 'revoked';
                 $color = $status === 'granted' ? 'red' : 'green';
+
                 return to_route('users.show', $user)
                     ->with('status', __("users.admin_$status", ['name' => $user->name]))
                     ->with('color', $color);
@@ -98,6 +66,7 @@ class UserController extends Controller
             case 'manager':
                 $status = $userService->manager($user) ? 'granted' : 'revoked';
                 $color = $status === 'granted' ? 'red' : 'green';
+
                 return to_route('users.show', $user)
                     ->with('status', __("users.manager_$status", ['name' => $user->name]))
                     ->with('color', $color);
@@ -106,6 +75,7 @@ class UserController extends Controller
 
             default:
                 $userService->getQrCode($user);
+
                 return view('users.qr', ['qrCode' => $userService->getQrCode($user)]);
 
                 break;

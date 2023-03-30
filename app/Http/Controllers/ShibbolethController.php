@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class ShibbolethController extends Controller
 {
-    public function create()
+    public function create(): string|RedirectResponse
     {
         if (is_null(request()->server('Shib-Handler'))) {
             return 'login';
@@ -17,12 +18,12 @@ class ShibbolethController extends Controller
         return redirect(
             request()
                 ->server('Shib-Handler')
-                . '/Login?target='
-                . action('\\' . __CLASS__ . '@store')
+                .'/Login?target='
+                .action('\\'.__CLASS__.'@store')
         );
     }
 
-    public function store()
+    public function store(): RedirectResponse|string
     {
         $mail = explode(';', request()->server('mail'));
 
@@ -36,8 +37,8 @@ class ShibbolethController extends Controller
 
         $user->refresh();
 
-        if (!$user->active) {
-            return redirect('blocked');
+        if (! $user->active) {
+            return 'You are blocked.';
         }
 
         Auth::login($user);
@@ -46,7 +47,7 @@ class ShibbolethController extends Controller
         return redirect()->intended('/');
     }
 
-    public function destroy()
+    public function destroy(): RedirectResponse
     {
         Auth::logout();
         Session::flush();
