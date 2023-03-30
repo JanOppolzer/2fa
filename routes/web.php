@@ -5,6 +5,7 @@ use App\Http\Controllers\ShibbolethController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserManagerController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -45,9 +46,7 @@ Route::delete('users/{user}/admin', [UserAdminController::class, 'destroy'])->na
 Route::post('users/{user}/manager', [UserManagerController::class, 'store'])->name('users.grant_manager');
 Route::delete('users/{user}/manager', [UserManagerController::class, 'destroy'])->name('users.revoke_manager');
 
-Route::get('profile', function () {
-    return to_route('users.show', auth()->user());
-})->middleware('auth');
+Route::get('profile', UserProfileController::class)->name('profile');
 
 Route::get('login', [ShibbolethController::class, 'create'])->middleware('guest')->name('login');
 Route::get('auth', [ShibbolethController::class, 'store'])->middleware('guest');
