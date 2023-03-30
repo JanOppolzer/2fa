@@ -70,4 +70,5 @@ return [
         'driver' => env('CACHE_DRIVER', 'file'),
     ],
 
+    'user_id' => env('LDAP_USER_ID_ATTRIBUTE', 'uid'),
 ];

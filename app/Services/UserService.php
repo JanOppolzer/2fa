@@ -18,7 +18,7 @@ class UserService
         try {
             $id = preg_replace('/@.*$/', '', $user->uniqueid);
 
-            return LdapUser::where('tcsPersonalID', '=', $id)->firstOrFail();
+            return LdapUser::where(config('ldap.user_id'), '=', $id)->firstOrFail();
         } catch (Throwable $t) {
             abort(404);
         }
