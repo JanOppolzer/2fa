@@ -4,11 +4,6 @@ namespace App\Http\Controllers;
 
 class UserProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Handle the incoming request.
      *

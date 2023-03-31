@@ -21,21 +21,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('language/{language}', LanguageController::class);
-
 Route::view('/', 'welcome')->middleware('guest');
 
-Route::view('home', 'home')->name('home')->middleware('auth');
+Route::get('language/{language}', LanguageController::class);
 
-Route::resource('users', UserController::class)->only('index', 'show', 'update', 'destroy');
+Route::middleware('auth')->group(function () {
+    Route::view('home', 'home')->name('home');
 
-Route::post('users/{user}/admin', [UserAdminController::class, 'store'])->name('users.grant_admin');
-Route::delete('users/{user}/admin', [UserAdminController::class, 'destroy'])->name('users.revoke_admin');
+    Route::resource('users', UserController::class)->only('index', 'show', 'update', 'destroy');
 
-Route::post('users/{user}/manager', [UserManagerController::class, 'store'])->name('users.grant_manager');
-Route::delete('users/{user}/manager', [UserManagerController::class, 'destroy'])->name('users.revoke_manager');
+    Route::post('users/{user}/admin', [UserAdminController::class, 'store'])->name('users.grant_admin');
+    Route::delete('users/{user}/admin', [UserAdminController::class, 'destroy'])->name('users.revoke_admin');
 
-Route::get('profile', UserProfileController::class)->name('profile');
+    Route::post('users/{user}/manager', [UserManagerController::class, 'store'])->name('users.grant_manager');
+    Route::delete('users/{user}/manager', [UserManagerController::class, 'destroy'])->name('users.revoke_manager');
+
+    Route::get('profile', UserProfileController::class)->name('profile');
+});
 
 Route::get('login', [ShibbolethController::class, 'create'])->middleware('guest')->name('login');
 Route::get('auth', [ShibbolethController::class, 'store'])->middleware('guest');
