@@ -4,12 +4,15 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Ldap\User as LdapUser;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use LdapRecord\Laravel\Testing\DirectoryEmulator;
 use Tests\TestCase;
 
 class UserManagerControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function an_admin_can_grant_manager_rights(): void
     {
