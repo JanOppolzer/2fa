@@ -29,9 +29,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin', function ($user) {
             return $user->admin;
         });
-
-        Gate::define('manager', function ($user) {
-            return $user->manager;
-        });
     }
 }
