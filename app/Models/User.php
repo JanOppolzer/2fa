@@ -41,7 +41,7 @@ class User extends Authenticatable
         'manager' => 'boolean',
     ];
 
-    public function scopeSearch($query, string $search = null)
+    public function scopeSearch($query, string $search = null): void
     {
         $query
             ->where('name', 'like', "%$search%")

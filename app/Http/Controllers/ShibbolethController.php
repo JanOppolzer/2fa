@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class ShibbolethController extends Controller
 {
-    public function create(): string|RedirectResponse
+    public function create(): RedirectResponse|string
     {
         if (is_null(request()->server('Shib-Handler'))) {
             return 'login';
