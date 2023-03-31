@@ -47,6 +47,8 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
+        abort_if($userService->checkToken($user), 500);
+
         $qrCode = $userService->getQrCode($user);
 
         return view('users.qr', compact('qrCode'));
