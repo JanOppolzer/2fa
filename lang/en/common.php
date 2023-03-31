@@ -1,0 +1,27 @@
+<?php
+
+return [
+    '2fa_disabled' => '2FA disabled.',
+    '2fa_status' => '2FA status',
+    'active' => 'Active',
+    'back' => 'Back',
+    'dashboard' => 'Dashboard',
+    'disable_2fa' => 'Disable 2FA',
+    'disabled' => 'Disabled',
+    'email' => 'Email address',
+    'enable_2fa' => 'Enable 2FA',
+    'enabled' => 'Enabled',
+    'inactive' => 'Inactive',
+    'javascript_long' => 'This application requires a web browser with JavaScript enabled.',
+    'javascript_short' => 'JavaScript required.',
+    'login' => 'Login',
+    'logout' => 'Logout',
+    'my_profile' => 'My Profile',
+    'name' => 'Name',
+    'search_users' => 'Search users',
+    'show' => 'Show',
+    'status' => 'Status',
+    'uniqueid' => 'UniqueID',
+    'users' => 'Users',
+    'verification_code' => 'Verification code',
+];

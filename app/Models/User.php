@@ -19,8 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'uniqueid',
         'email',
-        'password',
     ];
 
     /**
@@ -28,10 +28,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = [];
 
     /**
      * The attributes that should be cast.
@@ -39,6 +36,16 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'active' => 'boolean',
+        'admin' => 'boolean',
+        'manager' => 'boolean',
     ];
+
+    public function scopeSearch($query, string $search = null)
+    {
+        $query
+            ->where('name', 'like', "%$search%")
+            ->orWhere('uniqueid', 'like', "%$search%")
+            ->orWhere('email', 'like', "%$search%");
+    }
 }
