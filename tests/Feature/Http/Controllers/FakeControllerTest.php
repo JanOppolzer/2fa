@@ -49,7 +49,7 @@ class FakeControllerTest extends TestCase
             ->get(route('fakelogout'))
             ->assertOk();
 
-        $this->assertEquals(route('home'), url()->current());
+        $this->assertEquals('http://localhost', url()->current());
         $this->assertTrue(Auth::guest());
     }
 }

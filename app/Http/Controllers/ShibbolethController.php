@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -44,7 +45,7 @@ class ShibbolethController extends Controller
         Auth::login($user);
         Session::regenerate();
 
-        return redirect()->intended('/');
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     public function destroy(): RedirectResponse

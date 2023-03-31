@@ -29,9 +29,8 @@ Route::get('language/{locale}', function ($locale = null) {
     return redirect()->back();
 });
 
-Route::get('/', function () {
-    return auth()->user() ? view('dashboard') : view('welcome');
-})->name('home');
+Route::view('/', 'welcome')->middleware('guest');
+Route::view('home', 'home')->name('home')->middleware('auth');
 
 if (App::environment(['local', 'testing'])) {
     Route::post('fakelogin', [FakeController::class, 'store'])->middleware('guest')->name('fakelogin');

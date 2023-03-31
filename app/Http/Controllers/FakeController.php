@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -19,7 +20,7 @@ class FakeController extends Controller
             Auth::login($user);
             Session::regenerate();
 
-            return redirect()->intended('/');
+            return redirect()->intended(RouteServiceProvider::HOME);
         }
     }
 
