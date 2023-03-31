@@ -19,4 +19,4 @@ The above mentioned requirements can be easily achieved by using Ubuntu 22.04 LT
 
 ## Installation
 
-The easiest way to install MetaMan is to use [Envoy](https://laravel.com/docs/10.x/envoy) script in [metaman-envoy](https://github.com/JanOppolzer/2fa-envoy) repository. The repository also contains configuration snippets for Apache, Shibboleth SP and Supervisor daemons.
+The easiest way to install 2FA is to use [Envoy](https://laravel.com/docs/10.x/envoy) script in [2fa-envoy](https://github.com/JanOppolzer/2fa-envoy) repository. The repository also contains configuration snippets for Apache, Shibboleth SP and Supervisor daemons.
