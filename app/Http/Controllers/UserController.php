@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\UserService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -13,7 +15,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $this->authorize('viewAny', User::class);
 
@@ -25,7 +27,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, UserService $userService)
+    public function show(User $user, UserService $userService): View
     {
         $this->authorize('view', $user);
 
@@ -40,7 +42,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user, UserService $userService)
+    public function update(Request $request, User $user, UserService $userService): View
     {
         $this->authorize('update', $user);
 
@@ -56,7 +58,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, UserService $userService)
+    public function destroy(User $user, UserService $userService): RedirectResponse
     {
         $this->authorize('delete', $user);
 

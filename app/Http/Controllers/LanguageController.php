@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class LanguageController extends Controller
@@ -12,7 +13,7 @@ class LanguageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(string $language)
+    public function __invoke(string $language): RedirectResponse
     {
         if (isset($language) && in_array($language, config('app.locales'))) {
             app()->setLocale($language);

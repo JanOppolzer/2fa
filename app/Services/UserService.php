@@ -13,7 +13,7 @@ use Throwable;
 
 class UserService
 {
-    public function getLdapUser(User $user)
+    public function getLdapUser(User $user): LdapUser
     {
         try {
             $id = preg_replace('/@.*$/', '', $user->uniqueid);
@@ -24,7 +24,7 @@ class UserService
         }
     }
 
-    public function checkToken(User $user)
+    public function checkToken(User $user): bool
     {
         return ! is_null($this->getLdapUser($user)->getFirstAttribute('tokenSeeds'));
     }
@@ -48,7 +48,7 @@ class UserService
         return $qrCode;
     }
 
-    public function disableTotp(User $user)
+    public function disableTotp(User $user): void
     {
         $ldapUser = $this->getLdapUser($user);
         $ldapUser->tokenSeeds = null;
