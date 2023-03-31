@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
 
-class LocalizationTest extends TestCase
+class LanguageControllerTest extends TestCase
 {
     /** @test */
     public function czech_localization(): void
