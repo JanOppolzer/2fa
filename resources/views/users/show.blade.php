@@ -12,8 +12,12 @@
                     <dd>{{ __('common.name') }}</dd>
                     <dt class="gap-x-2 flex">
                         <span>{{ $user->name }}</span>
-                        <span><x-pils.user-admin :user="$user" /></span>
-                        <span><x-pils.user-manager :user="$user" /></span>
+                        <span>
+                            <x-pils.user-admin :user="$user" />
+                        </span>
+                        <span>
+                            <x-pils.user-manager :user="$user" />
+                        </span>
                     </dt>
                 </div>
                 <div class="bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 even:bg-white px-4 py-5">
@@ -39,7 +43,6 @@
                                 {{ __('common.enabled') }}
                             @endcan
                         @else
-                            <!-- dialog window to confirm enabling 2FA -->
                             <form action="{{ route('users.update', $user) }}" method="post">
                                 @csrf
                                 @method('patch')

@@ -12,6 +12,8 @@ return [
     'enable_2fa' => 'Enable 2FA',
     'enabled' => 'Enabled',
     'inactive' => 'Inactive',
+    'javascript_long' => 'This application requires a web browser with JavaScript enabled.',
+    'javascript_short' => 'JavaScript required.',
     'login' => 'Login',
     'logout' => 'Logout',
     'my_profile' => 'My Profile',

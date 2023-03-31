@@ -12,6 +12,8 @@ return [
     'enable_2fa' => 'Zapnout 2FA',
     'enabled' => 'Zapnuto',
     'inactive' => 'Neaktivní',
+    'javascript_long' => 'Tato aplikace vyžaduje webový prohlížeč se zapnutým JavaScriptem.',
+    'javascript_short' => 'JavaScript je vyžadován.',
     'login' => 'Přihlásit',
     'logout' => 'Odhlásit',
     'my_profile' => 'Můj profil',
