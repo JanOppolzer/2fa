@@ -34,20 +34,12 @@
                     <dt>
                         @if ($tokenSeeds)
                             @can('delete', $user)
-                                <form action="{{ route('users.destroy', $user) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <x-button color="red">{{ __('common.disable_2fa') }}</x-button>
-                                </form>
+                                <x-forms.2fa-disable :user="$user" />
                             @else
                                 {{ __('common.enabled') }}
                             @endcan
                         @else
-                            <form action="{{ route('users.update', $user) }}" method="post">
-                                @csrf
-                                @method('patch')
-                                <x-button color="lime">{{ __('common.enable_2fa') }}</x-button>
-                            </form>
+                            <x-forms.2fa-enable :user="$user" />
                         @endif
                     </dt>
                 </div>
@@ -56,36 +48,23 @@
     </div>
     <div>
         @can('admin')
-            <x-buttons.back href="{{ route('users.index') }}" />
-            <x-button form="admin" color="indigo">
-                @if ($user->admin)
-                    {{ __('users.revoke_admin') }}
-                @else
-                    {{ __('users.grant_admin') }}
-                @endif
-            </x-button>
-            <x-button form="manager">
-                @if ($user->manager)
-                    {{ __('users.revoke_manager') }}
-                @else
-                    {{ __('users.grant_manager') }}
-                @endif
-            </x-button>
-        @else
-            <x-buttons.back href="{{ route('home') }}" />
-        @endcan
 
-        @can('admin')
-            <form action="{{ route('users.update', $user) }}" method="post" id="admin">
-                @csrf
-                @method('patch')
-                <input type="hidden" name="action" value="admin">
-            </form>
-            <form action="{{ route('users.update', $user) }}" method="post" id="manager">
-                @csrf
-                @method('patch')
-                <input type="hidden" name="action" value="manager">
-            </form>
+            <x-back href="{{ route('users.index') }}" />
+
+            @if ($user->manager)
+                <x-forms.manager-revoke :user="$user" />
+            @else
+                <x-forms.manager-grant :user="$user" />
+            @endif
+
+            @if ($user->admin)
+                <x-forms.admin-revoke :user="$user" />
+            @else
+                <x-forms.admin-grant :user="$user" />
+            @endif
+        @else
+            <x-back href="{{ route('home') }}" />
+
         @endcan
     </div>
 @endsection

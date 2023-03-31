@@ -4,7 +4,7 @@
 @section('content')
     <p>{{ __('users.scan_qr') }}</p>
 
-    <div class="p-2 flex justify-center">{!! $qrCode !!}</div>
-    
-    <x-buttons.back href="/profile" />
+    <div class="flex justify-center p-2">{!! $qrCode !!}</div>
+
+    <x-back href="/profile" />
 @endsection

@@ -64,6 +64,8 @@ class UserController extends Controller
     {
         $this->authorize('delete', $user);
 
+        abort_unless($userService->checkToken($user), 500);
+
         $userService->disableTotp($user);
 
         return redirect()
