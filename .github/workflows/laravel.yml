@@ -28,7 +28,7 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
       - name: Run translations check
-       run: php artisan translations:check --excludedDirectories=vendor
+        run: php artisan translations:check --excludedDirectories=vendor
       # - name: Run Envy sync
       #   run: php artisan envy:sync --dry
       - name: Directory Permissions
