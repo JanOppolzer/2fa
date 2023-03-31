@@ -32,7 +32,7 @@ class UserService
     public function getQrCode(User $user)
     {
         $otp = TOTP::create();
-        $otp->setLabel("CESNET IdP ({$user->name})");
+        $otp->setLabel(config('app.idp_name')." ({$user->name})");
 
         $ldapUser = $this->getLdapUser($user);
         $ldapUser->tokenSeeds = $otp->getSecret();

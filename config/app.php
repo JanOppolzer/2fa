@@ -16,6 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'idp_name' => env('APP_IDP_NAME', 'Example IdP'),
 
     /*
     |--------------------------------------------------------------------------
