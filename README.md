@@ -6,7 +6,7 @@
 
 ## Requirements
 
-This application is written in Laravel 9 and uses PHP version 8.1.0 or newer.
+This application is written in Laravel 10 and uses PHP version 8.1.0 or newer.
 
 Authentication is expected to be managed by locally running Shibboleth Service Provider, so Apache web server is highly recommended as there is an official Shibboleth module for it. There is also an unofficial Shibboleth SP module for nginx web server, however, it has not been tested and so it is not recommended.
 
@@ -19,4 +19,4 @@ The above mentioned requirements can be easily achieved by using Ubuntu 22.04 LT
 
 ## Installation
 
-The easiest way to install MetaMan is to use [Envoy](https://laravel.com/docs/9.x/envoy) script in [metaman-envoy](https://github.com/JanOppolzer/2fa-envoy) repository. The repository also contains configuration snippets for Apache, Shibboleth SP and Supervisor daemons.
+The easiest way to install MetaMan is to use [Envoy](https://laravel.com/docs/10.x/envoy) script in [metaman-envoy](https://github.com/JanOppolzer/2fa-envoy) repository. The repository also contains configuration snippets for Apache, Shibboleth SP and Supervisor daemons.
