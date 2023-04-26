@@ -22,13 +22,15 @@
         "barryvdh/laravel-debugbar": "^3.8",
         "brianium/paratest": "^7.0",
         "fakerphp/faker": "^1.9.1",
+        "laravel/envoy": "^2.8",
         "laravel/pint": "^1.1",
         "laravel/sail": "^1.18",
         "larswiegers/laravel-translations-checker": "^0.5.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.0",
-        "spatie/laravel-ignition": "^2.0"
+        "spatie/laravel-ignition": "^2.0",
+        "vlucas/phpdotenv": "^5.5"
     },
     "autoload": {
         "psr-4": {
