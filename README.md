@@ -1,5 +1,7 @@
 # 2FA
 
+**THIS REPOSITORY IS ARCHIVED AND THE CODE HERE ISN'T USED FOR PRODUCTION ANYMORE!**
+
 2FA (short for Two Factor Authentication) is [Laravel](https://laravel.com)-based web application to set up 2FA or MFA (Multi Factor Authentication) for Shibboleth IdP.
 
 [![Actions Status](https://github.com/JanOppolzer/2fa/workflows/Laravel/badge.svg)](https://github.com/JanOppolzer/2fa/actions)
